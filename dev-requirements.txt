@@ -1,2 +1,4 @@
 pytest
-docker-py
+docker
+docker-compose
+flake8

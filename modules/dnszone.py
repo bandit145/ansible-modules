@@ -2,6 +2,23 @@
 # Copyright: (c) 2019, Philip Bove <phil@bove.online>
 # GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 
+
+from ansible.module_utils.basic import AnsibleModule
+import importlib
+import os
+
+try:
+    import dns.zone
+    import dns.rdatatype
+    import dns.rdtypes.IN as IN
+    import dns.rdtypes.ANY as ANY
+    # this is needed first and as such is explicitly imported
+    import dns.rdtypes.ANY.SOA
+    DNS_INSTALLED = True
+except ImportError:
+    DNS_INSTALLED = False
+
+
 ANSIBLE_METADATA = {
     'metadata_version': '1.1',
     'status': ['preview'],
@@ -17,157 +34,151 @@ EXAMPLES = '''
 RETURN = '''
 '''
 
-DNS_RECORDS_SPEC = dict(
-	host=dict(type='str', required=True),
-	ttl=dict(type='int', required=False, default=None),
-	data=dict(type='list', required=True),
-	type=dict(type='str',required=True),
-)
-
 IN_LIST = [
-	'a',
-	'aaa',
-	'apl',
-	'dhcid',
-	'ipseckey',
-	'kx',
-	'naptr',
-	'nsap',
-	'nsap_ptr',
-	'px',
-	'srv',
-	'wks'
+    'a',
+    'aaa',
+    'apl',
+    'dhcid',
+    'ipseckey',
+    'kx',
+    'naptr',
+    'nsap',
+    'nsap_ptr',
+    'px',
+    'srv',
+    'wks'
 ]
 
 ANY_LIST = [
-	'afsdb',
-	'avc',
-	'caa',
-	'cdnskey',
-	'cds',
-	'cert',
-	'cname',
-	'csync',
-	'dlv',
-	'dname',
-	'dnskey',
-	'ds',
-	'eui48',
-	'eui64',
-	'gpos',
-	'hinfo',
-	'hip',
-	'isdn',
-	'loc',
-	'mx',
-	'ns',
-	'nsec',
-	'nsec3',
-	'nsec3param',
-	'openpgpkey',
-	'ptr',
-	'rp',
-	'rrsig',
-	'rt',
-	'spf',
-	'sshfp',
-	'tlsa',
-	'txt',
-	'uri',
-	'x25'
+    'afsdb',
+    'avc',
+    'caa',
+    'cdnskey',
+    'cds',
+    'cert',
+    'cname',
+    'csync',
+    'dlv',
+    'dname',
+    'dnskey',
+    'ds',
+    'eui48',
+    'eui64',
+    'gpos',
+    'hinfo',
+    'hip',
+    'isdn',
+    'loc',
+    'mx',
+    'ns',
+    'nsec',
+    'nsec3',
+    'nsec3param',
+    'openpgpkey',
+    'ptr',
+    'rp',
+    'rrsig',
+    'rt',
+    'spf',
+    'sshfp',
+    'tlsa',
+    'txt',
+    'uri',
+    'x25'
 ]
 
-from ansible.module_utils.basic import AnsibleModule
-import importlib
-import os
+DNS_RECORDS_SPEC = dict(
+    host=dict(type='str', required=True),
+    ttl=dict(type='int', required=False, default=None),
+    data=dict(type='dict', required=True),
+    type=dict(type='str',required=True)
+)
 
-try:
-	import dns.zone
-	import dns.rdatatype
-	import dns.rdtypes.IN as IN
-	import dns.rdtypes.ANY as ANY
-	DNS_INSTALLED = True
-except ImportError:
-	DNS_INSTALLED = False
+def import_record_type(module, record, rec_class):
+    try:
+        importlib.import_module('dns.rdtypes.{rec_class}.{rec}'.format(rec=record['type'].upper(), rec_class=rec_class))
+    except ImportError:
+        module.fail_json(msg='{rec} type not supported in this version of dnspython'.format())
 
 
 def find_zone(module):
-	if os.path.exists:
-		return True, dns.zone.Zone.from_file(module.params['zone_path']+'db.'+module.params['name'])
-	return False, None
+    zone_path = '{zone_path}/db.{zone_name}'.format(zone_path=module.params['zone_path'], zone_name=module.params['name'])
+    if os.path.exists(zone_path):
+        return True, dns.zone.from_file(zone_path)
+    return False, None
 
 
 def build_zone(module, serial):
-	zone = dns.zone.Zone(module.params['origin'])
-	# create soa seperate
-	if not serial:
-		serial = 0
-	soa_rdataset = zone.find_rdataset(module.params['name'], dns.rdataclass.ANY, dns.rdatatype.SOA, create=True)
-	soa_rdata = ANY.SOA.SOA(dns.rdataclass.ANY, dns.rdatatype.SOA, module.params['expire'], module.params['minimum'], module.params['master_name'], 
-		module.params['refresh'], module.params['retry'], module.params['responsible_name'], serial)
-	soa_rdataset.add(soa_rdata, module.params['ttl'])
+    zone = dns.zone.Zone(module.params['name'])
+    # create soa seperate
+    if not serial:
+        serial = 0
+    soa_rdataset = zone.find_rdataset(module.params['name'], dns.rdatatype.SOA, create=True)
+    soa_rdata = ANY.SOA.SOA(dns.rdataclass.IN, dns.rdatatype.SOA, module.params['master_name'], module.params['responsible_name'],
+        serial, module.params['refresh'], module.params['retry'], module.params['expire'], module.params['negative_caching'])
+    soa_rdataset.add(soa_rdata, module.params['ttl'])
 
-	for host in module.params['records']:
-		if host['ttl']:
-			ttl = host['ttl']
-		else:
-			ttl = module.param['ttl']
-		rdataset = zone.find_rdataset(host['host'], create=True)
-		if host.type.lower() in ANY_LIST:
-			rdata = getattr(ANY, host.type.upper())(dns.rdataclass.ANY, getattr(dns.rdatatype, host.type.upper()), **host['data'])
-		elif host.type.lower() in IN_LIST:
-			rdata = getattr(IN, host.type.upper())(dns.rdataclass.IN, getattr(dns.rdatatype, host.type.upper()), **host['data'])
-		else:
-			module.fail_json(msg='record type not supported')
-		rdataset.add(rdata, ttl)
-	return zone
+    for host in module.params['records']:
+        if host['type'].lower() in ANY_LIST:
+            rec_class = 'ANY'
+        elif host['type'].lower() in IN_LIST:
+            rec_class = 'IN'
+        else:
+            module.fail_json(msg='record type not supported')
+        import_record_type(module, host, rec_class)
+        if host['ttl']:
+            ttl = host['ttl']
+        else:
+            ttl = module.params['ttl']
+        rdataset = zone.find_rdataset(host['host'], getattr(dns.rdatatype, host['type'].upper()), create=True)
+        if host['type'].lower() in ANY_LIST:
+            rdata = getattr(ANY, host['type'].upper())(dns.rdataclass.IN, getattr(dns.rdatatype, host['type'].upper()), **host['data'])
+        elif host['type'].lower() in IN_LIST:
+            rdata = getattr(getattr(IN, host['type'].upper()), host['type'].upper())(dns.rdataclass.IN, getattr(dns.rdatatype, host['type'].upper()), **host['data'])
+        rdataset.add(rdata, ttl)
+    return zone
 
-
-def update_dyn_zone(module, zone):
-	soa_rdataset = zone.find_rdataset(module.params['name'], dns.rdataclass.ANY, dns.rdatatype.SOA)
-	soa_rdata = soa.rdataset.items[0].copy()
-	for host in module.params['records']:
-		rdataset = zone.get_rdataset(host['host'], create=True)
-		for  record in  rdataset.items:
-		if rdataset:
-			if host.type.lower() in ANY_LIST:
-				rdata = getattr(ANY, host.type.upper())(dns.rdataclass.ANY, getattr(dns.rdatatype, host.type.upper()), **host['data'])
-			elif host.type.lower() in IN_LIST:
-				rdata = getattr(IN, host.type.upper())(dns.rdataclass.IN, getattr(dns.rdatatype, host.type.upper()), **host['data'])
-			else:
-				module.fail_json(msg='record type not supported')
-			rdataset.add(rdata, ttl)
-
-
-def ensure(module, hosts):
-	pass
-
+def ensure(module):
+    changed = False
+    result, cur_zone = find_zone(module)
+    if cur_zone:
+        soa_rdata = zone.find_rdataset(module.params['name'], dns.rdataclass.ANY, dns.rdatatype.SOA, create=False)[0]
+        serial = soa_rdata.serial
+    else:
+        serial = None
+    new_zone = build_zone(module, serial)
+    if module.params['state'] == 'present':
+        if new_zone != cur_zone:
+            changed = True
+            with open('{path}/db.{zone_name}'.format(path=module.params['zone_path'], zone_name=module.params['name']), 'w') as zone_file:
+                new_zone.to_file(zone_file)
+    elif module.params['state'] == 'absent':
+        if cur_zone:
+            changed = True
+            os.remove('{path}/db.{zone_name}'.format(path=module.params['zone_path'], zone_name=module.params['name']))
+    module.exit_json(changed=changed)
 
 def main():
-	module = AnsibleModule(
-			argument_spec=dict(
-				ttl=dict(type='int', required=True),
-				origin=dict(type='str', required=False),
-				master_name=dict(type='str', required=True),
-				records=dict(type='list', required=True),
-				responsible_name=dict(type='str', required=True),
-				refresh=dict(type='int', required=False, default=3),
-				retry=dict(type='int', required=False, default=1),
-				expire=dict(type='int', required=False, default=1),
-				negative_caching=dict(type='str', required=False, default='1h'),
-				dynamic=dict(type='bool', required=False, choices=[True, False]),
-				records=dict(type='list', required=True, elements='dict', options=DNS_RECORDS_SPEC),
-				state=dict(type='str', required=True, default='present', choices=['present','absent']),
-				zone_path=dict(type='path', required=True, default='/var/named/')
-			),
-			supports_check_mode=True
-	)
-	if not DNS_INSTALLED:
-		module.fail_json(msg='dnspython not installed')
-	hosts = []
-	for record in module.params['records']:
-		hosts.append(record['host'])
-	ensure(module, hosts)
+    module = AnsibleModule(
+            argument_spec=dict(
+                ttl=dict(type='int', required=True),
+                name=dict(type='str', required=True, aliases=['origin']),
+                master_name=dict(type='str', required=True),
+                responsible_name=dict(type='str', required=True),
+                refresh=dict(type='int', default=3),
+                retry=dict(type='int', default=1),
+                expire=dict(type='int',  default=1),
+                negative_caching=dict(type='str', default=1),
+                dynamic=dict(type='bool', required=False, choices=[True, False]),
+                records=dict(type='list', required=True, elements='dict', options=DNS_RECORDS_SPEC),
+                state=dict(type='str', default='present', choices=['present','absent']),
+                zone_path=dict(type='path', default='/var/named/')
+            ),
+            supports_check_mode=True
+    )
+    if not DNS_INSTALLED:
+        module.fail_json(msg='dnspython not installed')
+    ensure(module)
 
 if __name__ == '__main__':
-	main()
+    main()
