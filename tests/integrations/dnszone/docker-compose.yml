@@ -1,0 +1,9 @@
+version: "2"
+services:
+  dnszone:
+    image: quay.io/ansible/centos7-test-container
+    restart: on-failure
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:Z
+      - /run:/run:Z
+      - /tmp:/tmp:Z

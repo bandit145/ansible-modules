@@ -1,0 +1,25 @@
+---
+
+- name: TEST | prep environment
+  yum:
+    name:
+      - bind
+      - python-dns
+    state: present
+
+- name: TEST1 | create zone
+  dnszone:
+    name: test.com
+    ttl: 3900
+    master_name: ns1
+    responsible_name: test@test.com
+    records:
+      - host: test1
+        data: 
+          address: 192.168.50.2
+        type: A
+      - host: ns1
+        data: 
+          address: 192.168.50.3
+        type: A
+    state: present

@@ -1,0 +1,41 @@
+---
+
+- name: Setup test env
+  hosts: localhost
+  connection: local
+
+  tasks:
+
+    - name: deploy test env
+      docker_compose:
+        project_src: integrations/{{ module }}
+        state: present
+      register: svc_output
+      delegate_to: localhost
+        
+    - name: add host
+      add_host:
+        name: "{{ item }}"
+        groups: containers
+      loop: "{{ svc_output.services[module].keys() | list }}"
+
+
+- name:  Run tests(s)
+  hosts: containers
+  connection: docker
+  remote_user: root
+
+  tasks:
+    - include: integrations/{{ module }}/tasks.yml
+
+- name: Destory test env
+  hosts: localhost
+  connection: local
+
+  tasks:
+
+    - name: destroy test env
+      docker_compose:
+        project_src: integrations/{{ module }}
+        state: absent
+      delegate_to: localhost
