@@ -2,9 +2,8 @@ version: "3.6"
 services:
   dnszone:
     image: quay.io/ansible/centos7-test-container
-    restart: on-failure
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - /sys/fs/cgroup:/sys/fs/cgroup:Z
       - target: /run
         type: tmpfs
       - target: /tmp

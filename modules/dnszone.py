@@ -10,6 +10,8 @@ import os
 try:
     import dns.zone
     import dns.rdatatype
+    import dns.exception
+    import dns.name
     import dns.rdtypes.IN as IN
     import dns.rdtypes.ANY as ANY
     # this is needed first and as such is explicitly imported
@@ -102,10 +104,13 @@ def import_record_type(module, record, rec_class):
 
 
 def find_zone(module):
-    zone_path = '{zone_path}/db.{zone_name}'.format(zone_path=module.params['zone_path'], zone_name=module.params['name'])
-    if os.path.exists(zone_path):
-        return True, dns.zone.from_file(zone_path)
-    return False, None
+    try:
+        zone_path = '{zone_path}/db.{zone_name}'.format(zone_path=module.params['zone_path'], zone_name=module.params['name'])
+        if os.path.exists(zone_path):
+            return True, dns.zone.from_file(zone_path)
+        return False, None
+    except dns.exception.DNSException:
+        module.fail_json(msg='{zone} zone file syntax incorrect on host'.format(zone=module.params['name']))
 
 
 def build_zone(module, serial):
@@ -113,8 +118,8 @@ def build_zone(module, serial):
     # create soa seperate
     if not serial:
         serial = 0
-    soa_rdataset = zone.find_rdataset(module.params['name'], dns.rdatatype.SOA, create=True)
-    soa_rdata = ANY.SOA.SOA(dns.rdataclass.IN, dns.rdatatype.SOA, module.params['master_name'], module.params['responsible_name'],
+    soa_dataset = zone.find_rdataset(dns.name.from_text(module.params['name']), dns.rdatatype.SOA, create=True)
+    soa_rdata = dns.rdata.from_text(dns.rdataclass.IN, dns.rdatatype.SOA, module.params['master_name'], module.params['responsible_name'],
         serial, module.params['refresh'], module.params['retry'], module.params['expire'], module.params['negative_caching'])
     soa_rdataset.add(soa_rdata, module.params['ttl'])
 
@@ -130,7 +135,7 @@ def build_zone(module, serial):
             ttl = host['ttl']
         else:
             ttl = module.params['ttl']
-        rdataset = zone.find_rdataset(host['host'], getattr(dns.rdatatype, host['type'].upper()), create=True)
+        rdataset = zone.find_rdataset(dns.name.from_text(host['host']), getattr(dns.rdatatype, host['type'].upper()), create=True)
         if host['type'].lower() in ANY_LIST:
             rdata = getattr(ANY, host['type'].upper())(dns.rdataclass.IN, getattr(dns.rdatatype, host['type'].upper()), **host['data'])
         elif host['type'].lower() in IN_LIST:
@@ -147,9 +152,11 @@ def ensure(module):
     else:
         serial = None
     new_zone = build_zone(module, serial)
+    module.fail_json(msg=new_zone.to_text())
     if module.params['state'] == 'present':
         if new_zone != cur_zone:
             changed = True
+            module.fail_json(msg=new_zone.to_text())
             with open('{path}/db.{zone_name}'.format(path=module.params['zone_path'], zone_name=module.params['name']), 'w') as zone_file:
                 new_zone.to_file(zone_file)
     elif module.params['state'] == 'absent':

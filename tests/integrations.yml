@@ -18,6 +18,8 @@
         name: "{{ item }}"
         groups: containers
       loop: "{{ svc_output.services[module].keys() | list }}"
+  tags:
+    - create
 
 
 - name:  Run tests(s)
@@ -27,6 +29,8 @@
 
   tasks:
     - include: integrations/{{ module }}/tasks.yml
+  tags:
+    - test
 
 - name: Destory test env
   hosts: localhost
@@ -39,3 +43,5 @@
         project_src: integrations/{{ module }}
         state: absent
       delegate_to: localhost
+  tags:
+    - cleanup

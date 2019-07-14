@@ -2,3 +2,4 @@ pytest
 docker
 docker-compose
 flake8
+ansible-runner
