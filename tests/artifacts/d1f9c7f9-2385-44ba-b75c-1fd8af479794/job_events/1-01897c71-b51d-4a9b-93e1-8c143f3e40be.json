@@ -1,1 +1,0 @@
-{"event": "verbose", "uuid": "01897c71-b51d-4a9b-93e1-8c143f3e40be", "counter": 1, "stdout": "\u001b[1;35m [WARNING]: Unable to parse /home/phil/git/ansible-modules/tests/inventory as\u001b[0m", "start_line": 0, "end_line": 1, "runner_ident": "d1f9c7f9-2385-44ba-b75c-1fd8af479794"}

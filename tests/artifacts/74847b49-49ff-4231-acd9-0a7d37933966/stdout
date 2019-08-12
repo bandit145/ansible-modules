@@ -1,8 +1,0 @@
-[1;35m [WARNING]: Unable to parse /home/phil/git/ansible-modules/tests/inventory as[0m
-[1;35man inventory source[0m
-[1;35m[0m
-[1;35m [WARNING]: No inventory was parsed, only implicit localhost is available[0m
-[1;35m[0m
-[1;35m [WARNING]: provided hosts list is empty, only localhost is available. Note[0m
-[1;35mthat the implicit localhost does not match 'all'[0m
-[1;35m[0m
