@@ -1,0 +1,44 @@
+[1;35m [WARNING]: Unable to parse /home/phil/git/ansible-modules/tests/inventory as[0m
+[1;35man inventory source[0m
+[1;35m[0m
+[1;35m [WARNING]: No inventory was parsed, only implicit localhost is available[0m
+[1;35m[0m
+[1;35m [WARNING]: provided hosts list is empty, only localhost is available. Note[0m
+[1;35mthat the implicit localhost does not match 'all'[0m
+[1;35m[0m
+[1;35m [WARNING]: Could not match supplied host pattern, ignoring: containers[0m
+[1;35m[0m
+
+PLAY [Setup test env] **********************************************************
+
+TASK [Gathering Facts] *********************************************************
+[0;32mok: [localhost][0m
+
+TASK [deploy test env] *********************************************************
+[0;32mok: [localhost -> localhost][0m
+
+TASK [add host] ****************************************************************
+[0;33mchanged: [localhost] => (item=dnszone_dnszone_1)[0m
+
+PLAY [Run tests(s)] ************************************************************
+
+TASK [Gathering Facts] *********************************************************
+[0;32mok: [dnszone_dnszone_1][0m
+
+TASK [include] *****************************************************************
+[0;36mincluded: /home/phil/git/ansible-modules/tests/integrations/dnszone/tasks.yml for dnszone_dnszone_1[0m
+
+TASK [TEST | prep environment] *************************************************
+[0;32mok: [dnszone_dnszone_1][0m
+
+TASK [TEST1 | create zone] *****************************************************
+[1;35m [WARNING]: The value 1 (type int) in a string field was converted to u'1'[0m
+[1;35m(type string). If this does not look like what you expect, quote the entire[0m
+[1;35mvalue to ensure it does not change.[0m
+[1;35m[0m
+[0;31mfatal: [dnszone_dnszone_1]: FAILED! => {"changed": false, "msg": "test.com 3900 IN SOA ns1 test\\@test.com 0 3 1 1 1\nns1 0 IN A 192.168.50.3\ntest1 0 IN A 192.168.50.2\n"}[0m
+
+PLAY RECAP *********************************************************************
+[0;31mdnszone_dnszone_1[0m          : [0;32mok=3   [0m changed=0    unreachable=0    [0;31mfailed=1   [0m skipped=0    rescued=0    ignored=0   
+[0;33mlocalhost[0m                  : [0;32mok=3   [0m [0;33mchanged=1   [0m unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

@@ -1,0 +1,706 @@
+{
+    "_ansible_facts_gathered": true,
+    "ansible_all_ipv4_addresses": [
+        "172.20.0.2"
+    ],
+    "ansible_all_ipv6_addresses": [
+        "fe80::42:acff:fe14:2"
+    ],
+    "ansible_apparmor": {
+        "status": "disabled"
+    },
+    "ansible_architecture": "x86_64",
+    "ansible_bios_date": "06/16/2017",
+    "ansible_bios_version": "F3",
+    "ansible_cmdline": {
+        "BOOT_IMAGE": "(hd3,gpt2)/vmlinuz-5.1.18-300.fc30.x86_64",
+        "quiet": true,
+        "rd.lvm.lv": "fedora_ammo-box/swap",
+        "resume": "/dev/mapper/fedora_ammo--box-swap",
+        "rhgb": true,
+        "ro": true,
+        "root": "/dev/mapper/fedora_ammo--box-root"
+    },
+    "ansible_date_time": {
+        "date": "2019-08-12",
+        "day": "12",
+        "epoch": "1565573048",
+        "hour": "01",
+        "iso8601": "2019-08-12T01:24:08Z",
+        "iso8601_basic": "20190812T012408462738",
+        "iso8601_basic_short": "20190812T012408",
+        "iso8601_micro": "2019-08-12T01:24:08.462811Z",
+        "minute": "24",
+        "month": "08",
+        "second": "08",
+        "time": "01:24:08",
+        "tz": "UTC",
+        "tz_offset": "+0000",
+        "weekday": "Monday",
+        "weekday_number": "1",
+        "weeknumber": "32",
+        "year": "2019"
+    },
+    "ansible_default_ipv4": {
+        "address": "172.20.0.2",
+        "alias": "eth0",
+        "broadcast": "global",
+        "gateway": "172.20.0.1",
+        "interface": "eth0",
+        "macaddress": "02:42:ac:14:00:02",
+        "mtu": 1500,
+        "netmask": "255.255.0.0",
+        "network": "172.20.0.0",
+        "type": "ether"
+    },
+    "ansible_default_ipv6": {},
+    "ansible_device_links": {
+        "ids": {},
+        "labels": {},
+        "masters": {
+            "sdd3": [
+                "dm-0",
+                "dm-1",
+                "dm-2"
+            ]
+        },
+        "uuids": {}
+    },
+    "ansible_devices": {
+        "dm-0": {
+            "holders": [],
+            "host": "",
+            "links": {
+                "ids": [],
+                "labels": [],
+                "masters": [],
+                "uuids": []
+            },
+            "model": null,
+            "partitions": {},
+            "removable": "0",
+            "rotational": "0",
+            "sas_address": null,
+            "sas_device_handle": null,
+            "scheduler_mode": "",
+            "sectors": "146800640",
+            "sectorsize": "512",
+            "size": "70.00 GB",
+            "support_discard": "512",
+            "vendor": null,
+            "virtual": 1
+        },
+        "dm-1": {
+            "holders": [],
+            "host": "",
+            "links": {
+                "ids": [],
+                "labels": [],
+                "masters": [],
+                "uuids": []
+            },
+            "model": null,
+            "partitions": {},
+            "removable": "0",
+            "rotational": "0",
+            "sas_address": null,
+            "sas_device_handle": null,
+            "scheduler_mode": "",
+            "sectors": "16572416",
+            "sectorsize": "512",
+            "size": "7.90 GB",
+            "support_discard": "512",
+            "vendor": null,
+            "virtual": 1
+        },
+        "dm-2": {
+            "holders": [],
+            "host": "",
+            "links": {
+                "ids": [],
+                "labels": [],
+                "masters": [],
+                "uuids": []
+            },
+            "model": null,
+            "partitions": {},
+            "removable": "0",
+            "rotational": "0",
+            "sas_address": null,
+            "sas_device_handle": null,
+            "scheduler_mode": "",
+            "sectors": "810885120",
+            "sectorsize": "512",
+            "size": "386.66 GB",
+            "support_discard": "512",
+            "vendor": null,
+            "virtual": 1
+        },
+        "sda": {
+            "holders": [],
+            "host": "",
+            "links": {
+                "ids": [],
+                "labels": [],
+                "masters": [],
+                "uuids": []
+            },
+            "model": "KINGSTON SA400S3",
+            "partitions": {
+                "sda1": {
+                    "holders": [],
+                    "links": {
+                        "ids": [],
+                        "labels": [],
+                        "masters": [],
+                        "uuids": []
+                    },
+                    "sectors": "921600",
+                    "sectorsize": 512,
+                    "size": "450.00 MB",
+                    "start": "2048",
+                    "uuid": null
+                },
+                "sda2": {
+                    "holders": [],
+                    "links": {
+                        "ids": [],
+                        "labels": [],
+                        "masters": [],
+                        "uuids": []
+                    },
+                    "sectors": "202752",
+                    "sectorsize": 512,
+                    "size": "99.00 MB",
+                    "start": "923648",
+                    "uuid": null
+                },
+                "sda3": {
+                    "holders": [],
+                    "links": {
+                        "ids": [],
+                        "labels": [],
+                        "masters": [],
+                        "uuids": []
+                    },
+                    "sectors": "32768",
+                    "sectorsize": 512,
+                    "size": "16.00 MB",
+                    "start": "1126400",
+                    "uuid": null
+                },
+                "sda4": {
+                    "holders": [],
+                    "links": {
+                        "ids": [],
+                        "labels": [],
+                        "masters": [],
+                        "uuids": []
+                    },
+                    "sectors": "233281536",
+                    "sectorsize": 512,
+                    "size": "111.24 GB",
+                    "start": "1159168",
+                    "uuid": null
+                }
+            },
+            "removable": "0",
+            "rotational": "0",
+            "sas_address": null,
+            "sas_device_handle": null,
+            "scheduler_mode": "mq-deadline",
+            "sectors": "234441648",
+            "sectorsize": "512",
+            "size": "111.79 GB",
+            "support_discard": "512",
+            "vendor": "ATA",
+            "virtual": 1
+        },
+        "sdb": {
+            "holders": [],
+            "host": "",
+            "links": {
+                "ids": [],
+                "labels": [],
+                "masters": [],
+                "uuids": []
+            },
+            "model": "WDC WD10EZEX-60M",
+            "partitions": {
+                "sdb1": {
+                    "holders": [],
+                    "links": {
+                        "ids": [],
+                        "labels": [],
+                        "masters": [],
+                        "uuids": []
+                    },
+                    "sectors": "1953519616",
+                    "sectorsize": 512,
+                    "size": "931.51 GB",
+                    "start": "2048",
+                    "uuid": null
+                }
+            },
+            "removable": "0",
+            "rotational": "1",
+            "sas_address": null,
+            "sas_device_handle": null,
+            "scheduler_mode": "mq-deadline",
+            "sectors": "1953525168",
+            "sectorsize": "512",
+            "size": "931.51 GB",
+            "support_discard": "0",
+            "vendor": "ATA",
+            "virtual": 1
+        },
+        "sdc": {
+            "holders": [],
+            "host": "",
+            "links": {
+                "ids": [],
+                "labels": [],
+                "masters": [],
+                "uuids": []
+            },
+            "model": "WDC WD10EZEX-08M",
+            "partitions": {
+                "sdc1": {
+                    "holders": [],
+                    "links": {
+                        "ids": [],
+                        "labels": [],
+                        "masters": [],
+                        "uuids": []
+                    },
+                    "sectors": "262144",
+                    "sectorsize": 512,
+                    "size": "128.00 MB",
+                    "start": "34",
+                    "uuid": null
+                },
+                "sdc2": {
+                    "holders": [],
+                    "links": {
+                        "ids": [],
+                        "labels": [],
+                        "masters": [],
+                        "uuids": []
+                    },
+                    "sectors": "1953259520",
+                    "sectorsize": 512,
+                    "size": "931.39 GB",
+                    "start": "264192",
+                    "uuid": null
+                }
+            },
+            "removable": "0",
+            "rotational": "1",
+            "sas_address": null,
+            "sas_device_handle": null,
+            "scheduler_mode": "mq-deadline",
+            "sectors": "1953525168",
+            "sectorsize": "512",
+            "size": "931.51 GB",
+            "support_discard": "0",
+            "vendor": "ATA",
+            "virtual": 1
+        },
+        "sdd": {
+            "holders": [],
+            "host": "",
+            "links": {
+                "ids": [],
+                "labels": [],
+                "masters": [],
+                "uuids": []
+            },
+            "model": "Samsung SSD 860",
+            "partitions": {
+                "sdd1": {
+                    "holders": [],
+                    "links": {
+                        "ids": [],
+                        "labels": [],
+                        "masters": [],
+                        "uuids": []
+                    },
+                    "sectors": "409600",
+                    "sectorsize": 512,
+                    "size": "200.00 MB",
+                    "start": "2048",
+                    "uuid": null
+                },
+                "sdd2": {
+                    "holders": [],
+                    "links": {
+                        "ids": [],
+                        "labels": [],
+                        "masters": [],
+                        "uuids": []
+                    },
+                    "sectors": "2097152",
+                    "sectorsize": 512,
+                    "size": "1.00 GB",
+                    "start": "411648",
+                    "uuid": null
+                },
+                "sdd3": {
+                    "holders": [
+                        "fedora_ammo--box-swap",
+                        "fedora_ammo--box-home",
+                        "fedora_ammo--box-root"
+                    ],
+                    "links": {
+                        "ids": [],
+                        "labels": [],
+                        "masters": [
+                            "dm-0",
+                            "dm-1",
+                            "dm-2"
+                        ],
+                        "uuids": []
+                    },
+                    "sectors": "974264320",
+                    "sectorsize": 512,
+                    "size": "464.57 GB",
+                    "start": "2508800",
+                    "uuid": null
+                }
+            },
+            "removable": "0",
+            "rotational": "0",
+            "sas_address": null,
+            "sas_device_handle": null,
+            "scheduler_mode": "mq-deadline",
+            "sectors": "976773168",
+            "sectorsize": "512",
+            "size": "465.76 GB",
+            "support_discard": "512",
+            "vendor": "ATA",
+            "virtual": 1
+        }
+    },
+    "ansible_distribution": "CentOS",
+    "ansible_distribution_file_parsed": true,
+    "ansible_distribution_file_path": "/etc/redhat-release",
+    "ansible_distribution_file_variety": "RedHat",
+    "ansible_distribution_major_version": "7",
+    "ansible_distribution_release": "Core",
+    "ansible_distribution_version": "7",
+    "ansible_dns": {
+        "nameservers": [
+            "127.0.0.11"
+        ],
+        "options": {
+            "ndots": "0"
+        },
+        "search": [
+            "internal.homelab.systems"
+        ]
+    },
+    "ansible_domain": "",
+    "ansible_effective_group_id": 0,
+    "ansible_effective_user_id": 0,
+    "ansible_env": {
+        "HOME": "/root",
+        "HOSTNAME": "dc3b29430b74",
+        "LANG": "C",
+        "LC_ALL": "C",
+        "LC_NUMERIC": "C",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "PWD": "/",
+        "SHLVL": "2",
+        "_": "/usr/bin/python",
+        "container": "docker"
+    },
+    "ansible_eth0": {
+        "active": true,
+        "device": "eth0",
+        "ipv4": {
+            "address": "172.20.0.2",
+            "broadcast": "global",
+            "netmask": "255.255.0.0",
+            "network": "172.20.0.0"
+        },
+        "ipv6": [
+            {
+                "address": "fe80::42:acff:fe14:2",
+                "prefix": "64",
+                "scope": "link"
+            }
+        ],
+        "macaddress": "02:42:ac:14:00:02",
+        "mtu": 1500,
+        "promisc": false,
+        "speed": 10000,
+        "type": "ether"
+    },
+    "ansible_fibre_channel_wwn": [],
+    "ansible_fips": false,
+    "ansible_form_factor": "Desktop",
+    "ansible_fqdn": "dc3b29430b74",
+    "ansible_hostname": "dc3b29430b74",
+    "ansible_hostnqn": "",
+    "ansible_interfaces": [
+        "lo",
+        "eth0"
+    ],
+    "ansible_is_chroot": false,
+    "ansible_iscsi_iqn": "",
+    "ansible_kernel": "5.1.18-300.fc30.x86_64",
+    "ansible_lo": {
+        "active": true,
+        "device": "lo",
+        "ipv4": {
+            "address": "127.0.0.1",
+            "broadcast": "host",
+            "netmask": "255.0.0.0",
+            "network": "127.0.0.0"
+        },
+        "ipv6": [
+            {
+                "address": "::1",
+                "prefix": "128",
+                "scope": "host"
+            }
+        ],
+        "mtu": 65536,
+        "promisc": false,
+        "type": "loopback"
+    },
+    "ansible_local": {},
+    "ansible_lsb": {},
+    "ansible_machine": "x86_64",
+    "ansible_machine_id": "dc3b29430b7417036df87cffa65f1d15",
+    "ansible_memfree_mb": 10550,
+    "ansible_memory_mb": {
+        "nocache": {
+            "free": 12866,
+            "used": 3182
+        },
+        "real": {
+            "free": 10550,
+            "total": 16048,
+            "used": 5498
+        },
+        "swap": {
+            "cached": 0,
+            "free": 8091,
+            "total": 8091,
+            "used": 0
+        }
+    },
+    "ansible_memtotal_mb": 16048,
+    "ansible_mounts": [
+        {
+            "block_available": 5925280,
+            "block_size": 4096,
+            "block_total": 17931038,
+            "block_used": 12005758,
+            "device": "/dev/mapper/fedora_ammo--box-root",
+            "fstype": "ext4",
+            "inode_available": 3435659,
+            "inode_total": 4587520,
+            "inode_used": 1151861,
+            "mount": "/run/secrets",
+            "options": "rw,seclabel,relatime,bind",
+            "size_available": 24269946880,
+            "size_total": 73445531648,
+            "uuid": "N/A"
+        },
+        {
+            "block_available": 5925280,
+            "block_size": 4096,
+            "block_total": 17931038,
+            "block_used": 12005758,
+            "device": "/dev/mapper/fedora_ammo--box-root",
+            "fstype": "ext4",
+            "inode_available": 3435659,
+            "inode_total": 4587520,
+            "inode_used": 1151861,
+            "mount": "/etc/hosts",
+            "options": "rw,seclabel,relatime,bind",
+            "size_available": 24269946880,
+            "size_total": 73445531648,
+            "uuid": "N/A"
+        },
+        {
+            "block_available": 5925280,
+            "block_size": 4096,
+            "block_total": 17931038,
+            "block_used": 12005758,
+            "device": "/dev/mapper/fedora_ammo--box-root",
+            "fstype": "ext4",
+            "inode_available": 3435659,
+            "inode_total": 4587520,
+            "inode_used": 1151861,
+            "mount": "/var/log/journal/dc3b29430b7417036df87cffa65f1d15",
+            "options": "rw,seclabel,relatime,bind",
+            "size_available": 24269946880,
+            "size_total": 73445531648,
+            "uuid": "N/A"
+        },
+        {
+            "block_available": 5925280,
+            "block_size": 4096,
+            "block_total": 17931038,
+            "block_used": 12005758,
+            "device": "/dev/mapper/fedora_ammo--box-root",
+            "fstype": "ext4",
+            "inode_available": 3435659,
+            "inode_total": 4587520,
+            "inode_used": 1151861,
+            "mount": "/etc/hostname",
+            "options": "rw,seclabel,relatime,bind",
+            "size_available": 24269946880,
+            "size_total": 73445531648,
+            "uuid": "N/A"
+        },
+        {
+            "block_available": 5925280,
+            "block_size": 4096,
+            "block_total": 17931038,
+            "block_used": 12005758,
+            "device": "/dev/mapper/fedora_ammo--box-root",
+            "fstype": "ext4",
+            "inode_available": 3435659,
+            "inode_total": 4587520,
+            "inode_used": 1151861,
+            "mount": "/etc/resolv.conf",
+            "options": "rw,seclabel,relatime,bind",
+            "size_available": 24269946880,
+            "size_total": 73445531648,
+            "uuid": "N/A"
+        }
+    ],
+    "ansible_nodename": "dc3b29430b74",
+    "ansible_os_family": "RedHat",
+    "ansible_pkg_mgr": "yum",
+    "ansible_proc_cmdline": {
+        "BOOT_IMAGE": "(hd3,gpt2)/vmlinuz-5.1.18-300.fc30.x86_64",
+        "quiet": true,
+        "rd.lvm.lv": [
+            "fedora_ammo-box/root",
+            "fedora_ammo-box/swap"
+        ],
+        "resume": "/dev/mapper/fedora_ammo--box-swap",
+        "rhgb": true,
+        "ro": true,
+        "root": "/dev/mapper/fedora_ammo--box-root"
+    },
+    "ansible_processor": [
+        "0",
+        "AuthenticAMD",
+        "AMD Ryzen 5 1600X Six-Core Processor",
+        "1",
+        "AuthenticAMD",
+        "AMD Ryzen 5 1600X Six-Core Processor",
+        "2",
+        "AuthenticAMD",
+        "AMD Ryzen 5 1600X Six-Core Processor",
+        "3",
+        "AuthenticAMD",
+        "AMD Ryzen 5 1600X Six-Core Processor",
+        "4",
+        "AuthenticAMD",
+        "AMD Ryzen 5 1600X Six-Core Processor",
+        "5",
+        "AuthenticAMD",
+        "AMD Ryzen 5 1600X Six-Core Processor",
+        "6",
+        "AuthenticAMD",
+        "AMD Ryzen 5 1600X Six-Core Processor",
+        "7",
+        "AuthenticAMD",
+        "AMD Ryzen 5 1600X Six-Core Processor",
+        "8",
+        "AuthenticAMD",
+        "AMD Ryzen 5 1600X Six-Core Processor",
+        "9",
+        "AuthenticAMD",
+        "AMD Ryzen 5 1600X Six-Core Processor",
+        "10",
+        "AuthenticAMD",
+        "AMD Ryzen 5 1600X Six-Core Processor",
+        "11",
+        "AuthenticAMD",
+        "AMD Ryzen 5 1600X Six-Core Processor"
+    ],
+    "ansible_processor_cores": 6,
+    "ansible_processor_count": 1,
+    "ansible_processor_threads_per_core": 2,
+    "ansible_processor_vcpus": 12,
+    "ansible_product_name": "AX370-Gaming K5",
+    "ansible_product_serial": "Default string",
+    "ansible_product_uuid": "031b021c-040d-05ec-5506-e80700080009",
+    "ansible_product_version": "Default string",
+    "ansible_python": {
+        "executable": "/usr/bin/python",
+        "has_sslcontext": true,
+        "type": "CPython",
+        "version": {
+            "major": 2,
+            "micro": 5,
+            "minor": 7,
+            "releaselevel": "final",
+            "serial": 0
+        },
+        "version_info": [
+            2,
+            7,
+            5,
+            "final",
+            0
+        ]
+    },
+    "ansible_python_version": "2.7.5",
+    "ansible_real_group_id": 0,
+    "ansible_real_user_id": 0,
+    "ansible_selinux": {
+        "status": "Missing selinux Python library"
+    },
+    "ansible_selinux_python_present": false,
+    "ansible_service_mgr": "systemd",
+    "ansible_ssh_host_key_dsa_public": "AAAAB3NzaC1kc3MAAACBAN95sF91UWTqUSfoksLuQLV7VhS6mjgRQ5Gv25q7jY4s8wnEWWPwUapKEgpjrxU4aP8YkKArghQstRXmW5AC6LywrSgy2kd09xZo3XveAAU6Ds7PDlK8ebWh6dbM2/Mw6TuiCLlRl2jzhnemwMkP8NLIX28x0Dz6x2ug4qIdApgnAAAAFQC/UEVxJkbnPBdACKR/dX4HkALBrwAAAIEA22kHt2P4ij65mVe4RTqntvg/GdtdQwYRPgs3aO5H69gju2YTdqZyslAqn7IE7YhwGz5yHm4BhALzPfKkw2VbSoqRz1/m0lH5e604WAl3mxVDzs/rLhmpC3Ltw+YO7hDLkl9itjmt2JFaLWxm8U2/DaG3DVo75bTRbjCDdtxgEm8AAACAEm+vRd792IDAfT5qm7AtkseRNapDqYSdkhZZqC09h5XTkig7ryCuV6oCRWSFfIQM9LuHpxDAegFGm7ThdrJ9mlwt6ovvE0Fioakf+12y6/Lf0T7pct6uAT41WGuZDTtDDt1vkeEGtjwZx6MboBBb+4Mp5nanxuxaOTF3U2RDqGY=",
+    "ansible_ssh_host_key_ecdsa_public": "AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBO49J33Hm1nVF/WbFSUQjs5bLW3p0hQ27R3KB+UlzGi2FEnYciBDA35TGrM6ax4FdEB1ihx4sPQVEHME/pEXvV8=",
+    "ansible_ssh_host_key_ed25519_public": "AAAAC3NzaC1lZDI1NTE5AAAAIF5c6SjnuTIo1oPnT6BlOdm+f/Lz7Wkbk9mwd9LtJsKm",
+    "ansible_ssh_host_key_rsa_public": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDQFy4si0yvnc2JNkO390nM0XqqvSKFRE5I2w3XqKnbcqSMxWKflda6VNWWSmcN1MTsD7UI/BkRQyrPmo7POOLFMtfkj4Dlaj+bkSwu+Fugr7e79hRdp38RJUhbN02V0Q3lVsk3PT8Dh8KEE7AkMJeQV4EmPEEXxT/5WEO5xQ/u64omB8TrHuin8oFSrld0D1LEp9Xy4+J2EV6aSJG0NR+k9ljwgknW/XAEEMxka6CQ/+uw10Lyb7p1EF+V08wNb51yguBDqndo1E90hYCffu82Eaq70CjH1w59aX84HMaSEDPzFfLT/GttM3DA/RTthctS2dT6xJsYPZcJfJaCXq5l",
+    "ansible_swapfree_mb": 8091,
+    "ansible_swaptotal_mb": 8091,
+    "ansible_system": "Linux",
+    "ansible_system_capabilities": [
+        "cap_chown",
+        "cap_dac_override",
+        "cap_fowner",
+        "cap_fsetid",
+        "cap_kill",
+        "cap_setgid",
+        "cap_setuid",
+        "cap_setpcap",
+        "cap_net_bind_service",
+        "cap_net_raw",
+        "cap_sys_chroot",
+        "cap_mknod",
+        "cap_audit_write",
+        "cap_setfcap+eip"
+    ],
+    "ansible_system_capabilities_enforced": "True",
+    "ansible_system_vendor": "Gigabyte Technology Co., Ltd.",
+    "ansible_uptime_seconds": 1375,
+    "ansible_user_dir": "/root",
+    "ansible_user_gecos": "root",
+    "ansible_user_gid": 0,
+    "ansible_user_id": "root",
+    "ansible_user_shell": "/bin/bash",
+    "ansible_user_uid": 0,
+    "ansible_userspace_architecture": "x86_64",
+    "ansible_userspace_bits": "64",
+    "ansible_virtualization_role": "guest",
+    "ansible_virtualization_type": "docker",
+    "discovered_interpreter_python": "/usr/bin/python",
+    "gather_subset": [
+        "all"
+    ],
+    "module_setup": true
+}

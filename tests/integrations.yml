@@ -5,7 +5,6 @@
   connection: local
 
   tasks:
-
     - name: deploy test env
       docker_compose:
         project_src: integrations/{{ module }}
@@ -20,7 +19,6 @@
       loop: "{{ svc_output.services[module].keys() | list }}"
   tags:
     - create
-
 
 - name:  Run tests(s)
   hosts: containers
@@ -37,7 +35,6 @@
   connection: local
 
   tasks:
-
     - name: destroy test env
       docker_compose:
         project_src: integrations/{{ module }}

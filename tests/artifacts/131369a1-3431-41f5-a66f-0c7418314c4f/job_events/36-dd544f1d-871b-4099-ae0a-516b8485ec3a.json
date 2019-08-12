@@ -1,0 +1,1 @@
+{"event": "verbose", "uuid": "dd544f1d-871b-4099-ae0a-516b8485ec3a", "counter": 36, "stdout": "\u001b[1;35m [WARNING]: The value 1 (type int) in a string field was converted to u'1'\u001b[0m", "start_line": 34, "end_line": 35, "runner_ident": "131369a1-3431-41f5-a66f-0c7418314c4f"}

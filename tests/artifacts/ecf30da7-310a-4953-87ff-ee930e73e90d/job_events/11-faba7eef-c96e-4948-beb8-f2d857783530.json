@@ -1,0 +1,1 @@
+{"uuid": "faba7eef-c96e-4948-beb8-f2d857783530", "counter": 11, "stdout": "", "start_line": 10, "end_line": 10, "runner_ident": "ecf30da7-310a-4953-87ff-ee930e73e90d", "event": "playbook_on_start", "event_data": {"playbook": "integrations.yml", "playbook_uuid": "faba7eef-c96e-4948-beb8-f2d857783530", "pid": 11805}, "pid": 11805, "created": "2019-08-12T02:45:13.474264"}

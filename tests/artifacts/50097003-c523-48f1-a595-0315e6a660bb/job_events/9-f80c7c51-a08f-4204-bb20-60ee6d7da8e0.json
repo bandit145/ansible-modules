@@ -1,0 +1,1 @@
+{"event": "verbose", "uuid": "f80c7c51-a08f-4204-bb20-60ee6d7da8e0", "counter": 9, "stdout": "\u001b[1;35m [WARNING]: Could not match supplied host pattern, ignoring: containers\u001b[0m", "start_line": 8, "end_line": 9, "runner_ident": "50097003-c523-48f1-a595-0315e6a660bb"}

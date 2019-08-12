@@ -14,12 +14,12 @@
     master_name: ns1
     responsible_name: test@test.com
     records:
-      - host: test1
+      - name: test1
         data: 
-          address: 192.168.50.2
+          - 192.168.50.2
         type: A
-      - host: ns1
+      - name: ns1
         data: 
-          address: 192.168.50.3
+          - 192.168.50.3
         type: A
     state: present
